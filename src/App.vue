@@ -30,9 +30,15 @@ const newItemTitle = ref('');
 const activeTasks = computed(()=> tasks.value.filter(el => el.status ==='ACTIVE'));
 const completedTasks = computed(() => tasks.value.filter(el => el.status ==='COMPLETED'));
 
-function changeTaskStatus(id){
-  tasks.value.filter(el => el.id == id)[0].status ='COMPLETED';
+function changeTaskStatus(id) {
+  const task = tasks.value.find((el) => el.id === id);
+  if (task) {
+    setTimeout(() => {
+      task.status = task.status === "ACTIVE" ? "COMPLETED" : "ACTIVE";
+    }, 2); // Delay of 1ms
+  }
 }
+
 
 function deleteTask(id){
   tasks.value.filter(el => el.id == id)[0].status ='DELETED';
@@ -51,26 +57,37 @@ function addTask(){
 
 <template>
   <header>
-  <h1 >Todo Application</h1>
+  <h1 >Just Do It.</h1>
   <div>
     <input type="text" v-model="newItemTitle"  />
-    <button  @click="addTask()">Create</button>
+    <button   @click="addTask()">Create</button>
   </div>
 </header>
   <main>
     <ul v-if="activeTasks.length > 0">
-      <li v-for="item in activeTasks" >
-        <span>{{item.title}}</span>
+      <li v-for="item in activeTasks"   :key="item.id">
         <div>
-          <button  @click="changeTaskStatus(item.id)"><i class="fas fa-check"></i></button>
+          <input
+            type="checkbox"
+            :checked="item.status === 'COMPLETED'"
+            @change="() => changeTaskStatus(item.id)"
+          />
+          <span>{{item.title}}</span>
+        </div>
+        
+        <div>
           <button  @click="deleteTask(item.id)"><i class="fas fa-trash"></i></button>
         </div>
       </li>  
     </ul>
     <div v-else> All Tasks are completed gracefully! </div>
-    <ul>
+    <ul v-if="completedTasks.length > 0">
       <li v-for="item in completedTasks" >
-        <span><s>{{item.title}}</s></span>
+        <span>  <input
+            type="checkbox"
+            :checked="item.status === 'COMPLETED'"
+            @change="() => changeTaskStatus(item.id)"
+          /><s>{{item.title}}</s></span>
       </li>  
     </ul>
   </main>
