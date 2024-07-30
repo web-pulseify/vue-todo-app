@@ -1,0 +1,155 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+:root{
+ --bg-color: #003060;
+ --primary-color: #0E86D4;
+ --secondary-color:#055C9D;
+ --white-color: #67ccff;
+ --active-color: #fd7d7d;
+ --completed-color: #8bff8b;
+}
+
+* {
+    font-family: 'Roboto';
+}
+
+body{
+    background:
+    linear-gradient(to right, #0E86D4, #076fbf);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+  header h1{
+
+    font-weight: 900;
+    text-align: center;
+    background-color: var(--bg-color);
+    width: 500px;;
+    color:white;
+    border-radius: 8px;
+    font-size:24px;
+    padding-top:8px;
+    padding-bottom: 8px;
+  }
+  
+  header input {
+    font-weight: 500;
+    background-color: var(--bg-color);
+    color:var(--white-color);
+    border:none;
+    width:400px;
+    height: 32px;
+    outline: none;
+    text-indent: 12px;
+    border-radius:  8px 0  0px 8px ;
+
+  }
+  
+  header button{
+    width:100px;
+    border:none;
+    height: 34px;
+    
+    font-weight: 600;
+    background-color: #055C9D;
+    color:white;
+    border-radius: 0 8px 8px 0px;
+    cursor: pointer
+  }
+
+  header button:hover{
+    transition:0.2s ease-in;
+    background-color: var(--bg-color);
+  }
+
+
+
+  main ul {
+    border:1px solid var(--bg-color);
+    padding-bottom:12px;
+    border-radius: 8px;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+ main ul li{
+    text-decoration: none;;
+    list-style-type:none;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+    height: 50px;
+    border-radius: 8px;
+    margin-top:12px;
+    
+    padding-left: 12px;;
+    padding-right: 12px;
+    color:var(--bg-color);
+ }
+
+
+ main ul li button:hover{
+    transition:0.3s ease-in;    
+    scale:1.08;
+ }
+ 
+ main ul:first-child li{
+     background-color:  var(--active-color);
+ }
+
+ main ul:last-child li{
+
+    background-color:  var(--completed-color);
+}
+
+
+main button {
+    border:none;
+    background-color: #003060;
+    padding:12px;
+    margin-right: 5px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+
+main button:first-child:hover i{
+   transition: 0.2s ease-in-out;
+   color:var(--completed-color);
+}
+
+main button:last-child:hover i{
+    transition: 0.2s ease-in-out;
+    color:red;
+ }
+ 
+main button i {
+    
+    color: white;
+}
+
+main > div {
+    font-size: 24px;
+    margin-top:12px;
+    font-weight: 900;
+    color:var(--completed-color);
+}
+
+
+@keyframes fade{
+    0%{
+      opacity: 0;
+    }
+    100%{
+      opacity: 1;
+    }
+  }
+
+  li{
+    animation: fade 0.3s linear;
+  }
