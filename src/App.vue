@@ -33,9 +33,7 @@ const completedTasks = computed(() => tasks.value.filter(el => el.status ==='COM
 function changeTaskStatus(id) {
   const task = tasks.value.find((el) => el.id === id);
   if (task) {
-    setTimeout(() => {
       task.status = task.status === "ACTIVE" ? "COMPLETED" : "ACTIVE";
-    }, 2); // Delay of 1ms
   }
 }
 
