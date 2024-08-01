@@ -1,5 +1,6 @@
 <script setup>
 import { ref,computed } from "vue";
+import List from "./List.vue";
 const tasks = ref(
 [
   {
@@ -26,6 +27,7 @@ const tasks = ref(
 );
 
 const newItemTitle = ref('');
+
 
 const activeTasks = computed(()=> tasks.value.filter(el => el.status ==='ACTIVE'));
 const completedTasks = computed(() => tasks.value.filter(el => el.status ==='COMPLETED'));
@@ -58,35 +60,23 @@ function addTask(){
   <h1 >Just Do It.</h1>
   <div>
     <input type="text" v-model="newItemTitle"  />
-    <button   @click="addTask()">Create</button>
+    <button @click="addTask()">Create</button>
   </div>
 </header>
   <main>
-    <ul v-if="activeTasks.length > 0">
-      <li v-for="item in activeTasks"   :key="item.id">
-        <div>
-          <input
-            type="checkbox"
-            :checked="item.status === 'COMPLETED'"
-            @change="() => changeTaskStatus(item.id)"
-          />
-          <span>{{item.title}}</span>
-        </div>
-        
-        <div>
-          <button  @click="deleteTask(item.id)"><i class="fas fa-trash"></i></button>
-        </div>
-      </li>  
-    </ul>
-    <div v-else> All Tasks are completed gracefully! </div>
-    <ul v-if="completedTasks.length > 0">
-      <li v-for="item in completedTasks" >
-        <span>  <input
-            type="checkbox"
-            :checked="item.status === 'COMPLETED'"
-            @change="() => changeTaskStatus(item.id)"
-          /><s>{{item.title}}</s></span>
-      </li>  
-    </ul>
+    <List 
+      :completed-tasks="activeTasks"
+      :change-task-status="changeTaskStatus"
+      :list-status="'PENDING'"
+      :message = "'All tasks have been completed 🚀'"
+      :delete-task="deleteTask"
+    />
+    <List 
+      :completed-tasks="completedTasks"
+      :change-task-status="changeTaskStatus"
+      :list-status="'COMPLETED'"
+      :message = "''"
+      :delete-task="deleteTask"
+    />
   </main>
 </template>
